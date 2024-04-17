@@ -1,6 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
 import { testLogin, getCareers } from "~/data";
 
 export const meta: MetaFunction = () => {
@@ -12,7 +11,8 @@ export const meta: MetaFunction = () => {
 
 // loader
 // login check
-// login ok -> career get api
+// login ok -> redirect to /dashboard
+//  click 経歴書 /dashboard/profile に遷移
 // login ng -> redirect to /login
 
 /**
@@ -32,7 +32,7 @@ export const loader = async () => {
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1 className="text-red-400 text-4xl">iranai</h1>
+      <h1 className="text-blue-400 text-4xl">Welcome to Hogex!!!</h1>
     </div>
   );
 }
