@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
+import Sidebar from "~/components/sidebar";
 import { testLogin, getCareers } from "~/data";
 
 export const meta: MetaFunction = () => {
@@ -29,11 +30,13 @@ export const loader = async () => {
   return resCareer;
 };
 
-export default function Index() {
+export default function Layout() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1 className="text-red-400 text-4xl">サイドバー</h1>
-      <Outlet />
+    <div className="grid grid-cols-[304px,1fr] h-full">
+      <Sidebar />
+      <main className="p-7">
+        <Outlet />
+      </main>
     </div>
   );
 }

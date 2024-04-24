@@ -26,7 +26,8 @@ const careers: CareerData[] = [
       {
         id: 1,
         title: "Skill Sheet App",
-        description: "Remixを使って開発した",
+        description:
+          "Remixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発したRemixを使って開発した",
       },
       {
         id: 2,

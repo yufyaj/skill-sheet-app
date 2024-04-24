@@ -29,7 +29,7 @@ export const loader = async () => {
   return resCareer;
 };
 
-export default function Index() {
+export default function Profile() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1 className="text-blue-400 text-4xl">Welcome to Hogex!!!</h1>
