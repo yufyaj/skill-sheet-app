@@ -9,17 +9,34 @@ export const action = async ({ params }: ActionFunctionArgs) => {
   // const updates = Object.fromEntries(formData);
   const res = await testLogin();
   if (res) {
-    return redirect(`/`);
+    return redirect(`/dashboard`);
   }
   throw new Response("Not Found", { status: 404 });
 };
 
+const boxStyle =
+  "bg-loginBox text-center container mx-auto items-center w-[708px] h-[600px]";
+
+const boxTitle = "text-[40px] font-bold";
+
+const buttonStyle =
+  "bg-loginButton w-[250px] h-[60px] text-xl text-white font-semibold shadow-xl rounded-lg";
+
 export default function Login() {
   return (
     <>
-      <Form method="post" className="mx-auto bg-blue-700 w-96 p-12 text-center">
-        <button className="bg-black text-blue-500">ログイン</button>
-      </Form>
+      <body>
+        <Form method="post" className="h-screen flex items-center">
+          <div className={boxStyle}>
+            <div className="mt-[156px]">
+              <h1 className={boxTitle}>Skill Sheet App</h1>
+            </div>
+            <div className="mt-[130px]">
+              <button className={buttonStyle}>ログイン</button>
+            </div>
+          </div>
+        </Form>
+      </body>
     </>
   );
 }
