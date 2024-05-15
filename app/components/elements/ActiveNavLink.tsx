@@ -1,6 +1,12 @@
 import { NavLink } from "@remix-run/react";
 
-const ActiveNavLink = ({ to, value }: { to: string; value: string }) => {
+export default function ActiveNavLink({
+  to,
+  value,
+}: {
+  to: string;
+  value: string;
+}) {
   return (
     <NavLink
       className={({ isActive, isPending }) =>
@@ -13,6 +19,4 @@ const ActiveNavLink = ({ to, value }: { to: string; value: string }) => {
       {value}
     </NavLink>
   );
-};
-
-export default ActiveNavLink;
+}

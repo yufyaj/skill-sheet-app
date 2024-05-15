@@ -4,7 +4,7 @@ type Props = {
   variant: "primary" | "secondary" | "outline";
   size: "large" | "small";
   children: ReactNode;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & React.ComponentProps<"button">;
 
 const getStyle = (variant: Props["variant"]) => {
   switch (variant) {

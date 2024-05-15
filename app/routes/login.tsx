@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import Button from "~/components/button";
+import Button from "~/components/elements/button";
 import { testLogin } from "~/data";
 
 export const action = async ({ params }: ActionFunctionArgs) => {

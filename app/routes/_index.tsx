@@ -1,12 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
-import { testLogin, getCareers } from "~/data";
+import { Outlet, redirect } from "@remix-run/react";
+import { testLogin } from "~/data";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Skill Sheet App" },
+    { name: "description", content: "Let's make your resume!" },
   ];
 };
 
@@ -25,8 +24,7 @@ export const loader = async () => {
   if (!resLogin) {
     return redirect(`/login`);
   }
-  const resCareer = await getCareers({ userId: 1 });
-  return resCareer;
+  return redirect(`/resume`);
 };
 
 export default function Index() {

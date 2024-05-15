@@ -1,5 +1,5 @@
 import { Career } from "~/types/career";
-import Button from "./button";
+import Button from "./elements/button";
 
 type Props = {
   career: Career;

@@ -1,4 +1,9 @@
-import { Career, CareerData, CareerRequest } from "./types/career";
+import {
+  Career,
+  CareerData,
+  GetCareerRequest,
+  PostCareerRequest,
+} from "./types/career";
 import { LoginUser, User } from "./types/user";
 
 const user: User = {
@@ -54,11 +59,32 @@ const careers: CareerData[] = [
 ];
 
 export const getCareers = async (
-  getCareerRequest: CareerRequest
+  getCareerRequest: GetCareerRequest
 ): Promise<Career[]> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
   const career = careers.filter(
     (career) => career.id === getCareerRequest.userId
   );
   return career[0].careers;
+};
+
+export const postCareers = async (
+  postCareerRequest: PostCareerRequest
+): Promise<Career> => {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  const targetCareers = careers.filter(
+    (career) => career.id === postCareerRequest.userId
+  );
+  const nextIndex = targetCareers.length + 1;
+  const newCareer: Career = {
+    id: nextIndex,
+    title: postCareerRequest.title,
+    description: postCareerRequest.description,
+  };
+  careers.map((career) => {
+    if (career.id === postCareerRequest.userId) {
+      career.careers.push(newCareer);
+    }
+  });
+  return newCareer;
 };

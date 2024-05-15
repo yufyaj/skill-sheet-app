@@ -1,32 +1,14 @@
-import { MetaFunction, json, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import Button from "~/components/button";
+import { MetaFunction, json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import Button from "~/components/elements/button";
 import ProjectItem from "~/components/projectItem";
-import { testLogin, getCareers } from "~/data";
+import { getCareers } from "~/data";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "Resume" }, { name: "description", content: "Resume Page" }];
 };
 
-// loader
-// login check
-// login ok -> redirect to /dashboard
-//  click 経歴書 /dashboard/profile に遷移
-// login ng -> redirect to /login
-
-/**
- *  / <- ログインしてたら、経歴書画面を表示
- *        してなかったら -> /login
- */
-
 export const loader = async () => {
-  const resLogin = await testLogin();
-  if (!resLogin) {
-    return redirect(`/login`);
-  }
   const careers = await getCareers({ userId: 1 });
   return json({ careers });
 };
@@ -39,7 +21,7 @@ export default function Resume() {
       <h1 className="text-4xl font-bold">経歴書</h1>
       <div className="mt-14">
         <Button variant="primary" size="large">
-          新規作成
+          <Link to="new">新規作成</Link>
         </Button>
       </div>
       <hr className="mt-6"></hr>

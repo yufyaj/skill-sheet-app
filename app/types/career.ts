@@ -9,6 +9,10 @@ export type CareerData = {
   careers: Career[];
 };
 
-export type CareerRequest = {
+export type GetCareerRequest = {
   userId: number;
 };
+
+export type PostCareerRequest = {
+  userId: number;
+} & Omit<Career, "id">;
