@@ -1,5 +1,6 @@
 import { Career } from "~/types/career";
 import Button from "./elements/button";
+import { Link } from "@remix-run/react";
 
 type Props = {
   career: Career;
@@ -12,9 +13,11 @@ export default function ProjectItem({ career }: Props) {
         <div className="line-clamp-3">{career.description}</div>
       </div>
       <div className="bg-secondary flex flex-col space-y-2">
-        <Button variant="primary" size="small">
-          編集
-        </Button>
+        <Link to={`${career.id}/edit`}>
+          <Button variant="primary" size="small">
+            編集
+          </Button>
+        </Link>
         <Button variant="outline" size="small">
           削除
         </Button>

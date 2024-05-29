@@ -1,8 +1,11 @@
 import {
   Career,
   CareerData,
+  DeleteCareerRequest,
   GetCareerRequest,
+  GetCareersRequest,
   PostCareerRequest,
+  UpdateCareerRequest,
 } from "./types/career";
 import { LoginUser, User } from "./types/user";
 
@@ -59,7 +62,7 @@ const careers: CareerData[] = [
 ];
 
 export const getCareers = async (
-  getCareerRequest: GetCareerRequest
+  getCareerRequest: GetCareersRequest
 ): Promise<Career[]> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
   const career = careers.filter(
@@ -68,7 +71,26 @@ export const getCareers = async (
   return career[0].careers;
 };
 
-export const postCareers = async (
+export const getCareer = async (
+  getCareerRequest: GetCareerRequest
+): Promise<Career> => {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  const targetCareers = careers.find(
+    (career) => career.id === getCareerRequest.userId
+  );
+
+  const career = targetCareers?.careers?.find(
+    (career) => career.id === getCareerRequest.id
+  );
+
+  if (!career) {
+    throw new Error("Career not found");
+  }
+
+  return career;
+};
+
+export const postCareer = async (
   postCareerRequest: PostCareerRequest
 ): Promise<Career> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
@@ -87,4 +109,62 @@ export const postCareers = async (
     }
   });
   return newCareer;
+};
+
+export const updateCareer = async (
+  updateCareerRequest: UpdateCareerRequest
+): Promise<Career> => {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  const targetCareers = careers.find(
+    (career) => career.id === updateCareerRequest.userId
+  );
+  const targetCareer = targetCareers?.careers.find(
+    (career) => career.id === updateCareerRequest.id
+  );
+
+  if (!targetCareer) {
+    throw new Error("Career not found");
+  }
+
+  targetCareer.title = updateCareerRequest.title;
+  targetCareer.description = updateCareerRequest.description;
+
+  careers.map((career) => {
+    if (career.id === updateCareerRequest.userId) {
+      const index = career.careers.findIndex(
+        (c) => c.id === updateCareerRequest.id
+      );
+      if (index !== -1) {
+        career.careers[index] = targetCareer;
+      }
+    }
+  });
+
+  return targetCareer;
+};
+
+export const deleteCareer = async (
+  deleteCareerRequest: DeleteCareerRequest
+): Promise<Career> => {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const targetCareers = careers.find(
+    (career) => career.id === deleteCareerRequest.userId
+  );
+
+  if (!targetCareers) {
+    throw new Error("Unauthenticated");
+  }
+
+  const careerIndex = targetCareers.careers.findIndex(
+    (career) => career.id === deleteCareerRequest.id
+  );
+
+  if (careerIndex === -1) {
+    throw new Error("Career not found");
+  }
+
+  const deletedCareer = targetCareers.careers.splice(careerIndex, 1)[0];
+
+  return deletedCareer;
 };

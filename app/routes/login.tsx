@@ -1,13 +1,9 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import Button from "~/components/elements/button";
 import { testLogin } from "~/data";
 
-export const action = async ({ params }: ActionFunctionArgs) => {
-  console.log("action called", params);
-  // const formData = await request.formData();
-  // const updates = Object.fromEntries(formData);
+export const action = async () => {
   const res = await testLogin();
   if (res) {
     return redirect(`/resume`);
