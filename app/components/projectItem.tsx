@@ -1,11 +1,24 @@
 import { Career } from "~/types/career";
 import Button from "./elements/button";
-import { Link } from "@remix-run/react";
+import { Form, Link, useSubmit } from "@remix-run/react";
+import { AlertDialogDemo } from "./elements/AlertDialog";
+import { useState } from "react";
 
 type Props = {
   career: Career;
 };
 export default function ProjectItem({ career }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const submit = useSubmit();
+  const handleClickDelete = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // dialogの削除決定ボタンを押されたら、submitを実行して、削除アクションを呼ぶようにする
+  const handleSubmit = () => {
+    submit("");
+  };
+
   return (
     <div className="w-full h-32 py-4 px-8 flex justify-between space-x-8 bg-accent">
       <div className="min-w-[400px] w-full">
@@ -21,10 +34,34 @@ export default function ProjectItem({ career }: Props) {
             編集
           </Link>
         </Button>
-        <Button variant="outline" size="small">
+        <Button
+          variant="outline"
+          size="small"
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
           削除
         </Button>
       </div>
+      <AlertDialogDemo
+        title="削除"
+        description="削除しますか？"
+        isOpen={isOpen}
+        onOpenChange={handleClickDelete}
+        handleSubmit={handleSubmit}
+      />
+      <Form
+        onSubmit={() => {
+          submit(
+            { userId: 1, careerId: career.id },
+            {
+              action: `${career.id}/delete`,
+              method: "delete",
+            }
+          );
+        }}
+      />
     </div>
   );
 }
