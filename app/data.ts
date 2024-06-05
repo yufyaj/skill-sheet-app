@@ -29,7 +29,7 @@ export const login = async (loginUser: LoginUser) => {
 
 const careers: CareerData[] = [
   {
-    id: 1,
+    userId: 1,
     careers: [
       {
         id: 1,
@@ -45,7 +45,7 @@ const careers: CareerData[] = [
     ],
   },
   {
-    id: 2,
+    userId: 2,
     careers: [
       {
         id: 1,
@@ -66,7 +66,7 @@ export const getCareers = async (
 ): Promise<Career[]> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
   const career = careers.filter(
-    (career) => career.id === getCareerRequest.userId
+    (career) => career.userId === getCareerRequest.userId
   );
   return career[0].careers;
 };
@@ -76,7 +76,7 @@ export const getCareer = async (
 ): Promise<Career> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
   const targetCareers = careers.find(
-    (career) => career.id === getCareerRequest.userId
+    (career) => career.userId === getCareerRequest.userId
   );
 
   const career = targetCareers?.careers?.find(
@@ -94,17 +94,17 @@ export const postCareer = async (
   postCareerRequest: PostCareerRequest
 ): Promise<Career> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
-  const targetCareers = careers.filter(
-    (career) => career.id === postCareerRequest.userId
+  const targetCareer = careers.find(
+    (career) => career.userId === postCareerRequest.userId
   );
-  const nextIndex = targetCareers.length + 1;
+  const nextIndex = targetCareer ? targetCareer.careers.length + 1 : 1;
   const newCareer: Career = {
     id: nextIndex,
     title: postCareerRequest.title,
     description: postCareerRequest.description,
   };
   careers.map((career) => {
-    if (career.id === postCareerRequest.userId) {
+    if (career.userId === postCareerRequest.userId) {
       career.careers.push(newCareer);
     }
   });
@@ -116,7 +116,7 @@ export const updateCareer = async (
 ): Promise<Career> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
   const targetCareers = careers.find(
-    (career) => career.id === updateCareerRequest.userId
+    (career) => career.userId === updateCareerRequest.userId
   );
   const targetCareer = targetCareers?.careers.find(
     (career) => career.id === updateCareerRequest.id
@@ -130,7 +130,7 @@ export const updateCareer = async (
   targetCareer.description = updateCareerRequest.description;
 
   careers.map((career) => {
-    if (career.id === updateCareerRequest.userId) {
+    if (career.userId === updateCareerRequest.userId) {
       const index = career.careers.findIndex(
         (c) => c.id === updateCareerRequest.id
       );
@@ -149,7 +149,7 @@ export const deleteCareer = async (
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   const targetCareers = careers.find(
-    (career) => career.id === deleteCareerRequest.userId
+    (career) => career.userId === deleteCareerRequest.userId
   );
 
   if (!targetCareers) {

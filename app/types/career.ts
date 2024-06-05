@@ -5,7 +5,7 @@ export type Career = {
 };
 
 export type CareerData = {
-  id: number;
+  userId: number;
   careers: Career[];
 };
 

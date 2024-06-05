@@ -13,11 +13,14 @@ export default function ProjectItem({ career }: Props) {
         <div className="line-clamp-3">{career.description}</div>
       </div>
       <div className="bg-secondary flex flex-col space-y-2">
-        <Link to={`${career.id}/edit`}>
-          <Button variant="primary" size="small">
+        <Button variant="primary" size="small">
+          <Link
+            className="flex justify-center items-center"
+            to={`${career.id}/edit`}
+          >
             編集
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <Button variant="outline" size="small">
           削除
         </Button>

@@ -20,11 +20,11 @@ export default function Resume() {
     <div className="mx-12">
       <h1 className="text-4xl font-bold">経歴書</h1>
       <div className="mt-14">
-        <Link to="new">
-          <Button variant="primary" size="large">
+        <Button variant="primary" size="large">
+          <Link className="flex justify-center items-center" to="new">
             新規作成
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
       <hr className="mt-6"></hr>
       <div className="mt-12 space-y-7">
