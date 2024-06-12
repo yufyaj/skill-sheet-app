@@ -1,11 +1,17 @@
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
+import invariant from "tiny-invariant";
+import { deleteCareer } from "~/data";
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
-  // const careerId = params.careerId ?? "0";
+  invariant(params.careerId, "Missing careerId param");
 
-  // const formData = await request.formData();
-  // const career = Object.fromEntries(formData);
-  // await updateCareer({ userId: 1, id: parseInt(careerId), ...career });
-  console.log("test");
+  const careerId = params.careerId;
+  const { userId } = Object.fromEntries(await request.formData());
+
+  await deleteCareer({
+    userId: parseInt(userId.toString()),
+    id: parseInt(careerId),
+  });
+
   return redirect("/resume");
 };
