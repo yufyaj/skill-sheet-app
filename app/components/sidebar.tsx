@@ -8,9 +8,12 @@ import {
 import { useState, useEffect } from "react";
 import { auth } from "~/lib/firebaseConfig";
 import ActiveNavLink from "./elements/ActiveNavLink";
+import { useAuth } from "./auth/provider/AuthProvider";
 
 export default function Sidebar() {
   const [user, setUser] = useState<User | null>(null);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  /* 次回レンダリングのテストから試す */
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

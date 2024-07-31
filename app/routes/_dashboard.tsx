@@ -1,5 +1,6 @@
 import { redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
+import { AuthProvider } from "~/components/auth/provider/AuthProvider";
 import Sidebar from "~/components/sidebar";
 import { testLogin } from "~/data";
 
@@ -14,10 +15,12 @@ export const loader = async () => {
 export default function Layout() {
   return (
     <div className="grid grid-cols-[304px,1fr] h-full">
-      <Sidebar />
-      <main className="p-7">
-        <Outlet />
-      </main>
+      <AuthProvider>
+        <Sidebar />
+        <main className="p-7">
+          <Outlet />
+        </main>
+      </AuthProvider>
     </div>
   );
 }
