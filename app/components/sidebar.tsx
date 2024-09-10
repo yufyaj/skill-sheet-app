@@ -8,11 +8,9 @@ import {
 import { useState, useEffect } from "react";
 import { auth } from "~/lib/firebaseConfig";
 import ActiveNavLink from "./elements/ActiveNavLink";
-import { useAuth } from "./auth/provider/AuthProvider";
 
 export default function Sidebar() {
   const [user, setUser] = useState<User | null>(null);
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
   /* 次回レンダリングのテストから試す */
 
   useEffect(() => {
@@ -37,7 +35,14 @@ export default function Sidebar() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      console.log("User signed out");
+      const res = await fetch("/signout", {
+        method: "POST",
+      });
+
+      if (!res.ok) {
+        throw new Error("something went wrong");
+      }
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error during sign out:", error);
     }

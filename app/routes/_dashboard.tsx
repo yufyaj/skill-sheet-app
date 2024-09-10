@@ -1,17 +1,17 @@
-import { redirect } from "@remix-run/node";
+import { json, LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import { AuthProvider } from "~/components/auth/provider/AuthProvider";
 import Sidebar from "~/components/sidebar";
-import { testLogin } from "~/data";
+import { getSession } from "./session";
 
-export const loader = async () => {
-  const resLogin = await testLogin();
-  if (!resLogin) {
-    return redirect(`/login`);
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  if (session.has("userId")) {
+    return json({});
   }
-  return null;
-};
 
+  return redirect(`/login`);
+};
 export default function Layout() {
   return (
     <div className="grid grid-cols-[304px,1fr] h-full">

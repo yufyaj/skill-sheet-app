@@ -1,6 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Outlet, redirect } from "@remix-run/react";
-import { testLogin } from "~/data";
+import { MetaFunction } from "@remix-run/node";
+import { Outlet } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,14 +17,6 @@ export const meta: MetaFunction = () => {
  *  / <- ログインしてたら、経歴書画面を表示
  *        してなかったら -> /login
  */
-
-export const loader = async () => {
-  const resLogin = await testLogin();
-  if (!resLogin) {
-    return redirect(`/login`);
-  }
-  return redirect(`/resume`);
-};
 
 export default function Index() {
   return (

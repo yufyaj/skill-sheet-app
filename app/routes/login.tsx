@@ -20,7 +20,19 @@ export default function Login() {
       const result = await signInWithPopup(auth, provider);
       // サインイン成功
       const user = result.user;
-      console.log("User Info:", user);
+      const formData = new FormData();
+      formData.append("userId", user.uid);
+      const res = await fetch("/signin", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("something went wrong");
+      }
+
+      // useNavigationを使う
+      window.location.href = "/resume";
     } catch (error) {
       // エラー処理
       console.error("Error during sign in:", error);

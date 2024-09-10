@@ -17,7 +17,6 @@ export default function ProjectItem({ career }: Props) {
 
   // dialogの削除決定ボタンを押されたら、submitを実行して、削除アクションを呼ぶようにする
   const handleSubmit = () => {
-    console.log("submitしました。");
     submit(
       { userId: 1 },
       {

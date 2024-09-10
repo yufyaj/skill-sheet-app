@@ -9,6 +9,7 @@ export default function ActiveNavLink({
 }) {
   return (
     <NavLink
+      reloadDocument
       className={({ isActive, isPending }) =>
         `text-3xl ${
           isPending ? " text-accent" : isActive ? " text-primary" : ""
